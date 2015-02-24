@@ -7,7 +7,7 @@
 import os
 import re
 import glob
-import cinch
+import cinch-cli
 from distutils.core import setup
 
 # This is for future requirements
@@ -24,10 +24,10 @@ def find_packages(path='.'):
 # setup
 setup_options = dict(
 	# module name
-	name = 'cinch',
+	name = 'cinch-cli',
 
 	# module version
-	version = cinch.__version__,
+	version = cinch-cli.__version__,
 
 	# description
 	description = 'Command Line Environment for cinch',
@@ -42,13 +42,13 @@ setup_options = dict(
 	author_email = 'bergen@lanl.gov',
 
 	# scripts to install
-	scripts = ['bin/cinch'],
+	scripts = ['bin/ccli'],
 
 	# packages
 	packages = find_packages(),
 
 	# package dir
-	package_dir = { 'cinch' : 'cinch' },
+	package_dir = { 'cinch-cli' : 'cinch-cli' },
 
 	# license
 	license = 'NONE'
