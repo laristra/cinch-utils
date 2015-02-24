@@ -3,7 +3,7 @@
 # All rights reserved.
 #------------------------------------------------------------------------------#
 
-project(cinch)
+project(cinch-utils)
 
 cmake_minimum_required(VERSION 2.8)
 
@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 2.8)
 # Cinch cmake search path and includes
 #------------------------------------------------------------------------------#
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cinch/cmake)
 
 include(insource)
 include(documentation)
@@ -44,9 +44,9 @@ find_package(PythonInterp 2.7 REQUIRED)
 
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import distutils.sysconfig as cg; print cg.get_python_lib(0,0,prefix='${CMAKE_INSTALL_PREFIX}')" OUTPUT_VARIABLE PYTHON_INSTDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-install(DIRECTORY cli/cinch DESTINATION ${PYTHON_INSTDIR}
+install(DIRECTORY ccli/ccli DESTINATION ${PYTHON_INSTDIR}
     FILES_MATCHING PATTERN "*.py")
-install(PROGRAMS cli/bin/cinch DESTINATION bin)
+install(PROGRAMS ccli/bin/ccli DESTINATION bin)
 
 #------------------------------------------------------------------------------#
 # Setup for shell configuration files
@@ -59,6 +59,10 @@ configure_file(${CMAKE_SOURCE_DIR}/env/cinchenv.sh.in
 # csh
 configure_file(${CMAKE_SOURCE_DIR}/env/cinchenv.csh.in
     ${CMAKE_BINARY_DIR}/env/cinchenv.csh @ONLY)
+
+# environment modules
+configure_file(${CMAKE_SOURCE_DIR}/env/cinchenv.in
+    ${CMAKE_BINARY_DIR}/env/cinchenv @ONLY)
 
 file(GLOB ENV_HELPERS ${CMAKE_BINARY_DIR}/env/*)
 

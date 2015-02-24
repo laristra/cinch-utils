@@ -1,0 +1,4 @@
+#%Module1.0
+
+prepend-path PATH @CMAKE_INSTALL_PREFIX@/bin
+prepend-path PYTHONPATH @PYTHON_INSTDIR@
