@@ -72,7 +72,7 @@ install(FILES ${ENV_HELPERS} DESTINATION bin)
 # Install git utilities
 #------------------------------------------------------------------------------#
 
-file(GLOB GIT_HELPERS ${CMAKE_SOURCE_DIR}/git/scripts/*)
+file(GLOB GIT_HELPERS ${CMAKE_SOURCE_DIR}/git/*)
 
 install(FILES ${GIT_HELPERS} DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
