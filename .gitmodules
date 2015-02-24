@@ -1,0 +1,3 @@
+[submodule "cinch"]
+	path = cinch
+	url = git@darwin.lanl.gov:cinch.git
