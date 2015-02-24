@@ -4,15 +4,15 @@
 
 The Cinch CLI can easily be extended with new services.
 To add a new service, first
-take a look at one of the files under 'cinch/services' (other than
+take a look at one of the files under 'ccli/services' (other than
 \_init\_.py or any of the .pyc files).  Each of these services inherits
-from the Service base class (defined in 'cinch/base.py').  The important
+from the Service base class (defined in 'ccli/base.py').  The important
 parts to include in a new service are captured in the following example:
 
 ~~~~ {#serviceexample .python .numberLines startFrom="0"}
    # example_service.py
 
-    from cinch.base import Service
+    from ccli.base import Service
 
     class MyService(Service):
 
@@ -40,7 +40,7 @@ In this strawman example, we import the Service base class definition on
 line 02.  Line 04 defines our new service class.  In lines 06 through 15,
 we define the class initialization.  Lines 09 and 10 request a parser
 for our service that was passed in from the main command-line interface
-class (defined in 'cinch/clidriver.py').  To add new options, take a look
+class (defined in 'ccli/clidriver.py').  To add new options, take a look
 at the python documentation for the argparse module.  Line 13 sets the
 callback method associated with our service name to the main method of
 our new service class.  In this example, the main method just prints out

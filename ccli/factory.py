@@ -3,7 +3,7 @@
 # All rights reserved.
 #------------------------------------------------------------------------------#
 
-from cinch.services import *
+from cinch_cli.services import *
 
 #------------------------------------------------------------------------------#
 # Service factory to create instances of classes that derive from Service.

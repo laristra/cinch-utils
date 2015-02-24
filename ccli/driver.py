@@ -7,11 +7,11 @@ from __future__ import generators
 import random
 import sys
 import argparse
-from cinch.__init__ import __version__
-from cinch.factory import *
-from cinch.base import *
-from cinch.utils import *
-from cinch.services import *
+from ccli.__init__ import __version__
+from ccli.factory import *
+from ccli.base import *
+from ccli.utils import *
+from ccli.services import *
 
 #------------------------------------------------------------------------------#
 # Internal main routine.  This is the top-level once we are inside of the
@@ -23,7 +23,7 @@ def main():
     """
     """
 
-    driver = create_clidriver()
+    driver = create_driver()
     return driver.main()
 
 # main
@@ -32,7 +32,7 @@ def main():
 # Create the command-line driver.
 #------------------------------------------------------------------------------#
 
-def create_clidriver():
+def create_driver():
 
     """
     """
@@ -40,7 +40,7 @@ def create_clidriver():
     driver = CLIDriver()
     return driver
 
-# create_clidriver
+# create_driver
 
 #------------------------------------------------------------------------------#
 # CLIDriver class
@@ -60,7 +60,7 @@ class CLIDriver():
         self.services = dict()
 
         # create top-level argument parser
-        self.parser = argparse.ArgumentParser(prog='cinch')
+        self.parser = argparse.ArgumentParser(prog='ccli')
 
         # create subparsers object to pass into services
         self.subparsers = self.parser.add_subparsers(help='sub-command help')
@@ -70,7 +70,7 @@ class CLIDriver():
 
         # add command-line options
         self.parser.add_argument('-v', '--version', action='version',
-            version='cinch version: ' + __version__)
+            version='ccli version: ' + __version__)
 
     # __init__
 

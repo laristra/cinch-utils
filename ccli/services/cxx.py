@@ -3,8 +3,8 @@
 # All rights reserved.
 #------------------------------------------------------------------------------#
 
-from cinch.base import Service
-from cinch.services.cxx_drivers.default import *
+from ccli.base import Service
+from ccli.services.cxx_drivers.default import *
 
 #------------------------------------------------------------------------------#
 # Source handler.

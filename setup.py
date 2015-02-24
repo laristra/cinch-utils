@@ -7,7 +7,7 @@
 import os
 import re
 import glob
-import cinch-cli
+import ccli
 from distutils.core import setup
 
 # This is for future requirements
@@ -24,10 +24,10 @@ def find_packages(path='.'):
 # setup
 setup_options = dict(
 	# module name
-	name = 'cinch-cli',
+	name = 'ccli',
 
 	# module version
-	version = cinch-cli.__version__,
+	version = ccli.__version__,
 
 	# description
 	description = 'Command Line Environment for cinch',
@@ -48,7 +48,7 @@ setup_options = dict(
 	packages = find_packages(),
 
 	# package dir
-	package_dir = { 'cinch-cli' : 'cinch-cli' },
+	package_dir = { 'ccli' : 'ccli' },
 
 	# license
 	license = 'NONE'

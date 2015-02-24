@@ -5,8 +5,8 @@
 
 import sys
 
-from cinch.base import Service
-from cinch.services.brand_drivers.walk import *
+from ccli.base import Service
+from ccli.services.brand_drivers.walk import *
 
 #------------------------------------------------------------------------------#
 # Documentation handler.

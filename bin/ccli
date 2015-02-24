@@ -5,11 +5,11 @@
 #------------------------------------------------------------------------------#
 
 import sys
-import cinch.clidriver
+import ccli.driver
 
 #------------------------------------------------------------------------------#
 # This script doesn't really do anything except to execute the command-line
-# driver, which is located in cinch/clidriver.py.  Look there for more
+# driver, which is located in ccli/driver.py.  Look there for more
 # information on the functionality of this script.
 #------------------------------------------------------------------------------#
 
@@ -19,10 +19,10 @@ def main():
     Main calling routine for cinch script.  For a more detailed explanation,
     run:
 
-    % ./cinch help
+    % ./ccli help
     """
 
-    return cinch.clidriver.main()
+    return ccli.driver.main()
 
 # main
 

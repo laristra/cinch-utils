@@ -6,7 +6,7 @@
 import re
 import os
 from os.path import join
-from cinch.services.brand_drivers.utils import *
+from ccli.services.brand_drivers.utils import *
 
 #------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------#

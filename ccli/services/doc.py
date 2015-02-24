@@ -7,8 +7,8 @@ import ast
 from pickle import Unpickler
 from collections import OrderedDict
 
-from cinch.base import Service
-from cinch.services.doc_drivers.walk import *
+from ccli.base import Service
+from ccli.services.doc_drivers.walk import *
 
 #------------------------------------------------------------------------------#
 # Documentation handler.

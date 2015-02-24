@@ -6,8 +6,8 @@
 import re
 import os
 from os.path import join
-from cinch.services.doc_drivers.utils import *
-from cinch.services.doc_drivers.document import *
+from ccli.services.doc_drivers.utils import *
+from ccli.services.doc_drivers.document import *
 
 symbols = {
     'document' : 'DOCUMENT',
@@ -24,9 +24,9 @@ def walk_tree(directory, suffixes, documents, \
     current_chapter = current_document.chapter('Default')
 
     if(verbose):
-        print 'cinch: initial document ' + \
+        print 'ccli: initial document ' + \
             current_document.title()
-        print 'cinch: initial chapter ' + \
+        print 'ccli: initial chapter ' + \
             current_chapter.title()
     # if
 
@@ -39,7 +39,7 @@ def walk_tree(directory, suffixes, documents, \
                 # Open file to search for symbols
                 with open(join(root,file)) as fd:
                     if(verbose):
-                        print 'cinch: processing ---- ' + file + ' ----'
+                        print 'ccli: processing ---- ' + file + ' ----'
 
                     # Grab all of the lines
                     lines = fd.readlines()
@@ -94,7 +94,7 @@ def walk_tree(directory, suffixes, documents, \
                                     documents[parsed['document']]
 
                                 if(verbose):
-                                    print 'cinch: -> document ' + \
+                                    print 'ccli: -> document ' + \
                                         current_document.title()
                                 # if
                             # if
@@ -105,7 +105,7 @@ def walk_tree(directory, suffixes, documents, \
                                     current_document.chapter(parsed['chapter'])
 
                                 if(verbose):
-                                    print 'cinch: -> chapter ' + \
+                                    print 'ccli: -> chapter ' + \
                                         current_chapter.title()
                                 # if
                             # if

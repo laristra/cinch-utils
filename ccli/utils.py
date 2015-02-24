@@ -3,9 +3,9 @@
 # All rights reserved.
 #------------------------------------------------------------------------------#
 
-from cinch.factory import *
-from cinch.base import *
-from cinch.services import *
+from ccli.factory import *
+from ccli.base import *
+from ccli.services import *
 
 #------------------------------------------------------------------------------#
 # create_services

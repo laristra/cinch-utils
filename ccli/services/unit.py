@@ -3,7 +3,7 @@
 # All rights reserved.
 #------------------------------------------------------------------------------#
 
-from cinch.base import Service
+from ccli.base import Service
 
 #------------------------------------------------------------------------------#
 # Unit test handler.
@@ -22,7 +22,7 @@ class CINCHUnitTest(Service):
 
 		# get a command-line parser
 		self.parser = subparsers.add_parser('unit',
-			help='Service to generate unit test templates.')
+			help='Service to generate unit-test templates.')
 
 		# set the callback for this sub-command
 		self.parser.set_defaults(func=self.main)
