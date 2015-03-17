@@ -2,3 +2,4 @@ cinch.egg-info
 *.egg
 *.pyc
 build
+*.swp
