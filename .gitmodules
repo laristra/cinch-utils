@@ -1,4 +1,4 @@
 [submodule "cinch"]
 	path = cinch
-	url = ssh://git@xcp-stahs.lanl.gov:7999/ngc/cinch.git
+	url = ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch.git
 	branch = master
