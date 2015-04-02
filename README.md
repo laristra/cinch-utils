@@ -23,9 +23,9 @@ used to configure your environment.  This may be installed in an
 appropriate system location, or locally by adding the installation
 bin directory to your MODULEPATH.
 
-**If you prefer, you may also set the required environments variables
+**If you prefer, you may also set the required environment variables
 manually:**
 
 ***PATH*** add the bin directory of the install path to your PATH
 
-***PYTHONPATH*** add the lib/python*X.X*/site-packages path to your PYTHONPATH
+***PYTHONPATH*** add the lib/pythonX.X/site-packages path to your PYTHONPATH
