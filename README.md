@@ -1,3 +1,12 @@
+# Requirements
+
+For full functionality, Cinch-Utils requires at least the tools
+and versions listed here:
+
+* CMake (Version 2.8)
+* Python (Version 2.7)
+* Pandoc (Version 1.12)
+
 # Installation
 
 To begin, configure Cinch-Utils with the path to the desired installation
