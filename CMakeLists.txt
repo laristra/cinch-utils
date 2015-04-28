@@ -61,8 +61,8 @@ configure_file(${CMAKE_SOURCE_DIR}/env/cinchenv.csh.in
     ${CMAKE_BINARY_DIR}/env/cinchenv.csh @ONLY)
 
 # environment modules
-configure_file(${CMAKE_SOURCE_DIR}/env/cinchenv.in
-    ${CMAKE_BINARY_DIR}/env/cinchenv @ONLY)
+configure_file(${CMAKE_SOURCE_DIR}/env/cinch.in
+    ${CMAKE_BINARY_DIR}/env/cinch @ONLY)
 
 file(GLOB ENV_HELPERS ${CMAKE_BINARY_DIR}/env/*)
 
