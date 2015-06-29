@@ -1,0 +1,80 @@
+#! /usr/bin/env python2
+
+import shutil
+from sh import git
+from sh import cd
+
+import os
+
+#------------------------------------------------------------------------------#
+#
+#------------------------------------------------------------------------------#
+
+class cd:
+    """Context manager for changing the current working directory"""
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+
+#------------------------------------------------------------------------------#
+#
+#------------------------------------------------------------------------------#
+
+gtest_root = "git@gitlab.lanl.gov:ngc-utils/gtest.git"
+gtest_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/gtest.git"
+
+git.clone("--bare", gtest_root)
+
+with cd("gtest.git"):
+    git.push("--mirror", gtest_mirror)
+
+# cleanup
+shutil.rmtree("gtest.git")
+
+#------------------------------------------------------------------------------#
+#
+#------------------------------------------------------------------------------#
+
+cinch_root = "git@gitlab.lanl.gov:ngc-utils/cinch.git"
+cinch_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch.git"
+
+git.clone("--bare", cinch_root)
+
+with cd("cinch.git"):
+    git.push("--mirror", cinch_mirror)
+
+# cleanup
+shutil.rmtree("cinch.git")
+
+# clone from mirrored source
+git.clone(cinch_mirror)
+
+with cd("cinch"):
+    with open(".gitmodules", "w") as fd:
+        fd.write("[submodule \"gtest\"]\n\tpath = gtest\n\turl = " + \
+            gtest_mirror)
+
+    git.add(".gitmodules")
+    git.commit("-m \"Mirror Update\"")
+    git.push()
+
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+
+cinch_utils_root = "git@gitlab.lanl.gov:ngc-utils/cinch-utils.git"
+cinch_utils_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch-utils.git"
+
+git.clone("--bare", cinch_utils_root)
+
+with cd("cinch-utils.git"):
+    git.push("--mirror", cinch_utils_mirror)
+
+#------------------------------------------------------------------------------#
+# vim: set tabstop=4 shiftwidth=4 expandtab:
+#------------------------------------------------------------------------------#
