@@ -1,13 +1,30 @@
 #! /usr/bin/env python2
 
+import os
 import shutil
+import tempfile
 from sh import git
 from sh import cd
 
-import os
+#------------------------------------------------------------------------------#
+# Notes:
+#   - sh calls must use comma delimited list of arguments. More than one
+#     argument in quotations may not work.
+#------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
-#
+# Repositories
+#------------------------------------------------------------------------------#
+
+gtest_root = "git@gitlab.lanl.gov:ngc-utils/gtest.git"
+gtest_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/gtest.git"
+cinch_root = "git@gitlab.lanl.gov:ngc-utils/cinch.git"
+cinch_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch.git"
+cinch_utils_root = "git@gitlab.lanl.gov:ngc-utils/cinch-utils.git"
+cinch_utils_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch-utils.git"
+
+#------------------------------------------------------------------------------#
+# Context manager
 #------------------------------------------------------------------------------#
 
 class cd:
@@ -23,57 +40,86 @@ class cd:
         os.chdir(self.savedPath)
 
 #------------------------------------------------------------------------------#
-#
+# Begin main
 #------------------------------------------------------------------------------#
 
-gtest_root = "git@gitlab.lanl.gov:ngc-utils/gtest.git"
-gtest_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/gtest.git"
+tmpdir = tempfile.mkdtemp()
+print tmpdir
 
-git.clone("--bare", gtest_root)
+with cd(tmpdir):
 
-with cd("gtest.git"):
-    git.push("--mirror", gtest_mirror)
+    #--------------------------------------------------------------------------#
+    # Mirror gtest
+    #--------------------------------------------------------------------------#
 
-# cleanup
-shutil.rmtree("gtest.git")
+    git.clone("--bare", gtest_root)
 
-#------------------------------------------------------------------------------#
-#
-#------------------------------------------------------------------------------#
+    with cd("gtest.git"):
+        git.push("--mirror", gtest_mirror)
 
-cinch_root = "git@gitlab.lanl.gov:ngc-utils/cinch.git"
-cinch_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch.git"
+    # cleanup
+    shutil.rmtree("gtest.git")
 
-git.clone("--bare", cinch_root)
+    #--------------------------------------------------------------------------#
+    # Mirror cinch and update gtest submodule
+    #--------------------------------------------------------------------------#
 
-with cd("cinch.git"):
-    git.push("--mirror", cinch_mirror)
+    git.clone("--bare", cinch_root)
 
-# cleanup
-shutil.rmtree("cinch.git")
+    with cd("cinch.git"):
+        git.push("--mirror", cinch_mirror)
 
-# clone from mirrored source
-git.clone(cinch_mirror)
+    # cleanup
+    shutil.rmtree("cinch.git")
 
-with cd("cinch"):
-    with open(".gitmodules", "w") as fd:
-        fd.write("[submodule \"gtest\"]\n\tpath = gtest\n\turl = " + \
-            gtest_mirror)
+    # clone from mirrored source
+    git.clone(cinch_mirror)
 
-    git.add(".gitmodules")
-    git.commit("-m \"Mirror Update\"")
-    git.push()
+    # update submodule path
+    with cd("cinch"):
+        with open(".gitmodules", "w") as fd:
+            fd.write("[submodule \"gtest\"]\n\tpath = gtest\n\turl = " + \
+                gtest_mirror)
 
-#------------------------------------------------------------------------------#
-#------------------------------------------------------------------------------#
+        git.add(".gitmodules")
+        git.commit("-m \"Mirror Update\"")
+        git.push()
 
-cinch_utils_root = "git@gitlab.lanl.gov:ngc-utils/cinch-utils.git"
-cinch_utils_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch-utils.git"
+    # cleanup
+    shutil.rmtree("cinch")
 
-git.clone("--bare", cinch_utils_root)
+    #--------------------------------------------------------------------------#
+    # Mirror cinch-utils and update cinch submodule
+    #--------------------------------------------------------------------------#
 
-with cd("cinch-utils.git"):
-    git.push("--mirror", cinch_utils_mirror)
+    git.clone("--bare", cinch_utils_root)
+
+    with cd("cinch-utils.git"):
+        git.push("--mirror", cinch_utils_mirror)
+
+    # clone from mirrored source
+    git.clone(cinch_utils_mirror)
+
+    # update submodule path
+    with cd("cinch-utils"):
+        with open(".gitmodules", "w") as fd:
+            fd.write("[submodule \"cinch\"]\n\tpath = cinch\n\turl = " + \
+                cinch_mirror)
+
+        git.add(".gitmodules")
+        git.commit("-m \"Mirror Update\"")
+        git.push()
+
+        git.submodule.update("--init", "--recursive")
+        git.submodule.foreach("--recursive", "git checkout master; git pull")
+        git.add("cinch")
+        git.commit("-m \"Mirror Update\"")
+        git.push()
+
+    # cleanup
+    shutil.rmtree("cinch-utils")
+
+shutil.rmtree(tmpdir)
 
 #------------------------------------------------------------------------------#
 # vim: set tabstop=4 shiftwidth=4 expandtab:
