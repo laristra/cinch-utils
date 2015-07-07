@@ -40,10 +40,70 @@ class cd:
         os.chdir(self.savedPath)
 
 #------------------------------------------------------------------------------#
+# Cinch project.cmake template
+#------------------------------------------------------------------------------#
+
+config_project = Template(
+"""
+#~----------------------------------------------------------------------------~#
+# Copyright (c) 2014 Los Alamos National Security, LLC
+# All rights reserved.
+#~----------------------------------------------------------------------------~#
+
+project(${PROJECT_NAME})
+
+set(CINCH_APPLICATION_DIRECTORY "${APPLICATION_DIRECTORY}")
+set(CINCH_LIBRARY_TARGET "${LIBRARY_TARGET}")
+set(CINCH_CONFIG_SUBPROJECTS "${SUBPROJECTS}")
+
+#~---------------------------------------------------------------------------~-#
+# Formatting options for emacs and vim.
+# vim: set tabstop=4 shiftwidth=4 expandtab :
+#~---------------------------------------------------------------------------~-#
+"""
+)
+
+#------------------------------------------------------------------------------#
+# Cinch documentation.cmake template
+#------------------------------------------------------------------------------#
+
+config_documentation = Template(
+"""
+#~----------------------------------------------------------------------------~#
+# Copyright (c) 2014 Los Alamos National Security, LLC
+# All rights reserved.
+#~----------------------------------------------------------------------------~#
+
+#~---------------------------------------------------------------------------~-#
+# Formatting options for emacs and vim.
+# vim: set tabstop=4 shiftwidth=4 expandtab :
+#~---------------------------------------------------------------------------~-#
+"""
+)
+
+#------------------------------------------------------------------------------#
+# Cinch packages.cmake template
+#------------------------------------------------------------------------------#
+
+config_packages = Template(
+"""
+#~----------------------------------------------------------------------------~#
+# Copyright (c) 2014 Los Alamos National Security, LLC
+# All rights reserved.
+#~----------------------------------------------------------------------------~#
+
+#~---------------------------------------------------------------------------~-#
+# Formatting options for emacs and vim.
+# vim: set tabstop=4 shiftwidth=4 expandtab :
+#~---------------------------------------------------------------------------~-#
+"""
+)
+
+#------------------------------------------------------------------------------#
 # CMakeLists.txt example template
 #------------------------------------------------------------------------------#
 
-exmaple_cmakelists = \
+example_cmakelists = \
 """
 #~----------------------------------------------------------------------------~#
 # Copyright (c) 2014 Los Alamos National Security, LLC
@@ -72,6 +132,56 @@ endif(ENABLE_UNIT_TESTS)
 # vim: set tabstop=2 shiftwidth=2 expandtab :
 #~---------------------------------------------------------------------------~-#
 """
+
+#------------------------------------------------------------------------------#
+# CMakeLists.txt application template
+#------------------------------------------------------------------------------#
+
+app_cmakelists = \
+"""
+#~----------------------------------------------------------------------------~#
+# Copyright (c) 2014 Los Alamos National Security, LLC
+# All rights reserved.
+#~----------------------------------------------------------------------------~#
+
+#------------------------------------------------------------------------------#
+# Add a rule to build the executable
+#------------------------------------------------------------------------------#
+
+add_executable(myapp app.cc)
+
+#------------------------------------------------------------------------------#
+# Add link dependencies
+#------------------------------------------------------------------------------#
+
+target_link_libraries(myapp ${CINCH_LIBRARY_TARGET} ${EXTRA_LIBS})
+
+#~---------------------------------------------------------------------------~-#
+# Formatting options for emacs and vim.
+# vim: set tabstop=4 shiftwidth=4 expandtab :
+#~---------------------------------------------------------------------------~-#
+"""
+
+#------------------------------------------------------------------------------#
+# Dummy application source
+#------------------------------------------------------------------------------#
+
+app_source = \
+"""
+/*~-------------------------------------------------------------------------~~*
+ *~-------------------------------------------------------------------------~~*/
+
+#include <iostream>
+
+int main(int argc, char ** argv) {
+    std::cerr << "Hello World" << std::endl;
+
+    return 0;
+} // main
+/*~------------------------------------------------------------------------~--*
+ *~------------------------------------------------------------------------~--*/
+"""
+
 
 #------------------------------------------------------------------------------#
 # Define verbose function
@@ -115,10 +225,52 @@ with cd(project_dir):
     # Create example sources
     with cd("src/example_src"):
         with open("CMakeLists.txt", 'w') as fd:
-            fd.write(exmaple_cmakelists[1:-1])
+            fd.write(example_cmakelists[1:-1])
 
         ccli.cxx("-c", "Example")
-        
+        ccli.unit("example_unit", "example1")
+
+    # Populate config directory
+    with cd("config"):
+
+        # Project settings
+        with open("project.cmake", 'w') as fd:
+            project_cmake = config_project.substitute(
+                PROJECT_NAME="myproject",
+                APPLICATION_DIRECTORY=app_dir,
+                LIBRARY_TARGET="mylib",
+                SUBPROJECTS=""
+            )
+            fd.write(project_cmake[1:-1])
+
+        # Documentation settings
+        with open("documentation.cmake", 'w') as fd:
+            documentation_cmake = config_documentation.substitute(
+                PROJECT_NAME="myproject",
+                APPLICATION_DIRECTORY=app_dir,
+                LIBRARY_TARGET="mylib",
+                SUBPROJECTS=""
+            )
+            fd.write(documentation_cmake[1:-1])
+
+        # Dependency settings
+        with open("packages.cmake", 'w') as fd:
+            packages_cmake = config_packages.substitute(
+                PROJECT_NAME="myproject",
+                APPLICATION_DIRECTORY=app_dir,
+                LIBRARY_TARGET="mylib",
+                SUBPROJECTS=""
+            )
+            fd.write(packages_cmake[1:-1])
+
+    # Create application list file
+    with cd(app_dir):
+        with open("CMakeLists.txt", 'w') as fd:
+            fd.write(app_cmakelists[1:-1])
+
+        with open("app.cc", 'w') as fd:
+            fd.write(app_source[1:-1])
+            
 
 #------------------------------------------------------------------------------#
 # vim: set tabstop=4 shiftwidth=4 expandtab:
