@@ -38,3 +38,12 @@ manually:**
 ***PATH*** add the bin directory of the install path to your PATH
 
 ***PYTHONPATH*** add the lib/pythonX.X/site-packages path to your PYTHONPATH
+
+# Dependencies
+
+Python 2.7
+  - sh 1.1.1
+Pandoc 1.12
+Doxygen 1.8
+CMake 3.2
+C++ Compiler (gcc 4.8, Intel 15)
