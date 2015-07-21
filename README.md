@@ -5,7 +5,11 @@ and versions listed here:
 
 * CMake (Version 2.8)
 * Python (Version 2.7)
+	- sh module (Version 1.11)
 * Pandoc (Version 1.12)
+* TeX Live (No particular version)
+* Doxygen (Version 1.8)
+* C++ Compiler (gcc 4.8, Intel 14)
 
 # Installation
 
@@ -15,6 +19,13 @@ directory:
     % mkdir build
     % cd build
     % cmake -DCMAKE_INSTALL_PREFIX=/path/to/install ..
+    % make install
+
+You can also use the curses version of CMake:
+
+    % mkdir build
+    % cd build
+    % ccmake ..
     % make install
 
 This will install the command-line tool and some helper scripts to
@@ -38,12 +49,3 @@ manually:**
 ***PATH*** add the bin directory of the install path to your PATH
 
 ***PYTHONPATH*** add the lib/pythonX.X/site-packages path to your PYTHONPATH
-
-# Dependencies
-
-Python 2.7
-  - sh 1.1.1
-Pandoc 1.12
-Doxygen 1.8
-CMake 3.2
-C++ Compiler (gcc 4.8, Intel 15)
