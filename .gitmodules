@@ -1,6 +1,3 @@
 [submodule "cinch"]
 	path = cinch
 	url = ../cinch.git
-[submodule "cinch-utils.wiki"]
-	path = cinch-utils.wiki
-	url = ../cinch-utils.wiki.git
