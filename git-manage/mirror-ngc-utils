@@ -17,11 +17,11 @@ from sh import cd
 #------------------------------------------------------------------------------#
 
 gtest_root = "git@gitlab.lanl.gov:ngc-utils/gtest.git"
-gtest_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/gtest.git"
+gtest_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/gtest.git"
 cinch_root = "git@gitlab.lanl.gov:ngc-utils/cinch.git"
-cinch_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch.git"
+cinch_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch.git"
 cinch_utils_root = "git@gitlab.lanl.gov:ngc-utils/cinch-utils.git"
-cinch_utils_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc/cinch-utils.git"
+cinch_utils_mirror = "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch-utils.git"
 
 #------------------------------------------------------------------------------#
 # Context manager
