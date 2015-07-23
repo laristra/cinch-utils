@@ -48,7 +48,7 @@ def clone_mirror(src, directory, args):
 			src, "into", directory
 	# if
 			
-#	git.clone("--mirror", src, directory)
+	git.clone("--mirror", src, directory)
 
 # clone_mirror
 
@@ -62,8 +62,8 @@ def push_mirror(dest, directory, args):
 		print "Pushing into", dest, "from", directory
 	# if
 
-#	with cd(directory):
-#		git.push("--mirror", dest)
+	with cd(directory):
+		git.push("--mirror", dest)
 	# with
 
 # push_mirror
@@ -179,7 +179,7 @@ for item in config:
 
 	# Push an archive to the red network
 	if(item["operation"] == "transfer"):
-		transfer_filie(directory, item["filename")
+		transfer_file(directory, item["filename"])
 	# if
 
 	# Clean up if we created a temporary

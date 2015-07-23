@@ -1,0 +1,31 @@
+[
+	{
+		"operation" : "mirror",
+		"src" : "git@gitlab.lanl.gov:ngc-utils/gtest.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/gtest.git"
+	},
+	{
+		"operation" : "clone",
+		"directory" : "/Users/bergen/.mirror/gtest.git",
+		"src" : "git@gitlab.lanl.gov:ngc-utils/gtest.git"
+	},
+	{
+		"operation" : "archive",
+		"filename" : "gtest.bz2",
+		"src" : "/Users/bergen/.mirror/gtest.git"
+	},
+	{
+		"operation" : "transfer",
+		"filename" : "gtest.bz2"
+	},
+	{
+		"operation" : "expand",
+		"filename" : "gtest.bz2",
+		"directory" : "/home/bergen/test"
+	},
+	{
+		"operation" : "push",
+		"directory" : "/Users/bergen/.mirror/gtest.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch.git"
+	}
+]
