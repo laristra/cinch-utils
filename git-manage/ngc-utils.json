@@ -13,5 +13,10 @@
 		"operation" : "mirror",
 		"src" : "git@gitlab.lanl.gov:ngc-utils/cinch-utils.git",
 		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch-utils.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@gitlab.lanl.gov:ngc-utils/cinch-multilib-example.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch-multilib-example.git"
 	}
 ]
