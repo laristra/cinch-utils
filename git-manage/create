@@ -52,9 +52,17 @@ config_project = Template(
 
 project(${PROJECT_NAME})
 
-set(CINCH_APPLICATION_DIRECTORY "${APPLICATION_DIRECTORY}")
-set(CINCH_LIBRARY_TARGET "${LIBRARY_TARGET}")
-set(CINCH_CONFIG_SUBPROJECTS "${SUBPROJECTS}")
+#------------------------------------------------------------------------------#
+# Set application directory
+#------------------------------------------------------------------------------#
+
+cinch_add_application_directory("${APPLICATION_DIRECTORY}")
+
+#------------------------------------------------------------------------------#
+# Add library targets
+#------------------------------------------------------------------------------#
+
+cinch_add_library_target("${LIBRARY_TARGET}" "${LIBRARY_TARGET_DIR}")
 
 #~---------------------------------------------------------------------------~-#
 # Formatting options for emacs and vim.
@@ -227,7 +235,7 @@ with cd(project_dir):
         with open("CMakeLists.txt", 'w') as fd:
             fd.write(example_cmakelists[1:-1])
 
-        ccli.cxx("-c", "Example")
+        ccli.cxx("-c", "-n mylib::example_src", "example")
         ccli.unit("example_unit", "example1")
 
     # Populate config directory
@@ -239,27 +247,21 @@ with cd(project_dir):
                 PROJECT_NAME="myproject",
                 APPLICATION_DIRECTORY=app_dir,
                 LIBRARY_TARGET="mylib",
-                SUBPROJECTS=""
+                LIBRARY_TARGET_DIR="src/mylib",
             )
             fd.write(project_cmake[1:-1])
 
         # Documentation settings
         with open("documentation.cmake", 'w') as fd:
             documentation_cmake = config_documentation.substitute(
-                PROJECT_NAME="myproject",
-                APPLICATION_DIRECTORY=app_dir,
-                LIBRARY_TARGET="mylib",
-                SUBPROJECTS=""
+                PROJECT_NAME="myproject"
             )
             fd.write(documentation_cmake[1:-1])
 
         # Dependency settings
         with open("packages.cmake", 'w') as fd:
             packages_cmake = config_packages.substitute(
-                PROJECT_NAME="myproject",
-                APPLICATION_DIRECTORY=app_dir,
-                LIBRARY_TARGET="mylib",
-                SUBPROJECTS=""
+                PROJECT_NAME="myproject"
             )
             fd.write(packages_cmake[1:-1])
 
