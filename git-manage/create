@@ -246,7 +246,7 @@ with cd(project_dir):
         with open("CMakeLists.txt", 'w') as fd:
             fd.write(example_cmakelists[1:-1])
 
-        ccli.cxx("-c", "Example")
+        ccli.cxx("-c", "-n mylib::example_src", "example")
         ccli.unit("example_unit", "example1")
 
     # Populate config directory
@@ -266,22 +266,14 @@ with cd(project_dir):
         # Documentation settings
         with open("documentation.cmake", 'w') as fd:
             documentation_cmake = config_documentation.substitute(
-                PROJECT_NAME="myproject",
-                APPLICATION_DIRECTORY=app_dir,
-                LIBRARY_TARGET="mylib",
-                LIBRARY_TARGET_DIRECTORY="src/mylib",
-                SUBPROJECTS=""
+                PROJECT_NAME="myproject"
             )
             fd.write(documentation_cmake[1:-1])
 
         # Dependency settings
         with open("packages.cmake", 'w') as fd:
             packages_cmake = config_packages.substitute(
-                PROJECT_NAME="myproject",
-                APPLICATION_DIRECTORY=app_dir,
-                LIBRARY_TARGET="mylib",
-                LIBRARY_TARGET_DIRECTORY="src/mylib",
-                SUBPROJECTS=""
+                PROJECT_NAME="myproject"
             )
             fd.write(packages_cmake[1:-1])
 
