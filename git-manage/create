@@ -52,9 +52,29 @@ config_project = Template(
 
 project(${PROJECT_NAME})
 
-set(CINCH_APPLICATION_DIRECTORY "${APPLICATION_DIRECTORY}")
-set(CINCH_LIBRARY_TARGET "${LIBRARY_TARGET}")
-set(CINCH_CONFIG_SUBPROJECTS "${SUBPROJECTS}")
+#------------------------------------------------------------------------------#
+# Set application directory
+#------------------------------------------------------------------------------#
+
+cinch_add_application_directory("${APPLICATION_DIRECTORY}")
+
+#------------------------------------------------------------------------------#
+# Add library targets
+#------------------------------------------------------------------------------#
+
+cinch_add_library_target("${LIBRARY_TARGET}" "${LIBRARY_TARGET_DIRECTORY}")
+
+#------------------------------------------------------------------------------#
+# Add subprojects
+#------------------------------------------------------------------------------#
+
+#cinch_add_subproject("ngclib" LIBRARIES "testlib")
+
+#------------------------------------------------------------------------------#
+# Set header suffix regular expression
+#------------------------------------------------------------------------------#
+
+set(CINCH_HEADER_SUFFIXES "\\.h|\\.hh")
 
 #~---------------------------------------------------------------------------~-#
 # Formatting options for emacs and vim.
@@ -124,7 +144,7 @@ set(example_src_SOURCES
 
 # Add unit test
 if(ENABLE_UNIT_TESTS)
-  cinch_add_unit(example_unit example_unit.cc)
+  cinch_add_unit(example_unit SOURCES example_unit.cc)
 endif(ENABLE_UNIT_TESTS)
 
 #~---------------------------------------------------------------------------~-#
@@ -182,7 +202,6 @@ int main(int argc, char ** argv) {
  *~------------------------------------------------------------------------~--*/
 """
 
-
 #------------------------------------------------------------------------------#
 # Define verbose function
 #------------------------------------------------------------------------------#
@@ -239,6 +258,7 @@ with cd(project_dir):
                 PROJECT_NAME="myproject",
                 APPLICATION_DIRECTORY=app_dir,
                 LIBRARY_TARGET="mylib",
+                LIBRARY_TARGET_DIRECTORY="src/mylib",
                 SUBPROJECTS=""
             )
             fd.write(project_cmake[1:-1])
@@ -249,6 +269,7 @@ with cd(project_dir):
                 PROJECT_NAME="myproject",
                 APPLICATION_DIRECTORY=app_dir,
                 LIBRARY_TARGET="mylib",
+                LIBRARY_TARGET_DIRECTORY="src/mylib",
                 SUBPROJECTS=""
             )
             fd.write(documentation_cmake[1:-1])
@@ -259,6 +280,7 @@ with cd(project_dir):
                 PROJECT_NAME="myproject",
                 APPLICATION_DIRECTORY=app_dir,
                 LIBRARY_TARGET="mylib",
+                LIBRARY_TARGET_DIRECTORY="src/mylib",
                 SUBPROJECTS=""
             )
             fd.write(packages_cmake[1:-1])
