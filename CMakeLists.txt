@@ -75,7 +75,8 @@ install(FILES ${ENV_HELPERS} DESTINATION bin)
 file(GLOB GIT_HELPERS ${CMAKE_SOURCE_DIR}/git/*)
 
 install(FILES ${GIT_HELPERS} DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 #------------------------------------------------------------------------------#
 # Formatting options for emacs and vim.
