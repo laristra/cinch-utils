@@ -1,0 +1,17 @@
+[
+	{
+		"operation" : "mirror",
+		"src" : "git@bitbucket.org:tuxfan/gtest.git",
+		"dest" : "git@gitlab.lanl.gov:csse/gtest.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@bitbucket.org:tuxfan/cinch.git",
+		"dest" : "git@gitlab.lanl.gov:csse/cinch.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@bitbucket.org:tuxfan/cinch-utils.git",
+		"dest" : "git@gitlab.lanl.gov:csse/cinch-utils.git"
+	}
+]
