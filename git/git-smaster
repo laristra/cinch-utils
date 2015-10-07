@@ -18,3 +18,12 @@ echo
 
 # Clone the project
 git clone --recursive $1
+
+# Parse off the name of the project
+project=`echo $1 | perl -ne 'm,([^/:]+)\.git$, && print "$1\n"'`
+
+# Checkout master in each submodule.  The default behavior leaves
+# the submodules headless, which can be disturbing to the average user...
+cd $project && git submodule foreach --recursive "
+	git checkout master
+";
