@@ -16,6 +16,20 @@ and versions listed here:
 * Doxygen (Version 1.8)
 * C++ Compiler (gcc 4.8, Intel 14)
 
+# Getting the Code
+
+Cinch-utils uses git submodules, so it must be checked out recursively:
+
+    % git clone --recursive git@server:repo/cinch-utils.git
+
+If you are using the main bitbucket site, use this:
+
+    % git clone --recursive git@bitbucket.org:tuxfan/cinch-utils.git
+
+If you are using the gitlab mirror at LANL, use this:
+
+    % git clone --recursive git@gitlab.lanl.gov:csse/cinch-utils.git
+
 # Installation
 
 To begin, configure Cinch-Utils with the path to the desired installation
