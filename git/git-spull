@@ -5,6 +5,11 @@
 
 # Echo warning that this script is an add-on
 echo "#------------------------------------------------------------------------------#"
+
+script_dir="$(dirname "$0")"
+. "${script_dir}/warning.sh"
+
+echo "#"
 echo "# Cinch-Utils Script"
 echo "#    git-spull"
 echo "#"
