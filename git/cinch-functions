@@ -21,9 +21,9 @@ function print_banner() {
 
 			echo "#------------------------------------------------------------------------------#"
 			printf "# ${YELLOW}!!!WARNING WARNING WARNING!!!${NC}\n"
-			printf "# ${RED}THIS IS NOT A STANDARD GIT FEATURE!!!${NC}\n"
-			printf "# ${RED}CINCH-UTILS MUST BE INSTALLED TO"
-			printf " USE THIS SCRIPT!!!${NC}\n"
+			printf "# ${RED}THIS IS NOT A STANDARD GIT FEATURE${NC}\n"
+			printf "# ${RED}IT IS PROVIDED BY THE CINCH-UTILS PROJECT${NC}\n"
+			printf "# ${RED}CINCH-UTILS MUST BE INSTALLED TO USE THIS SCRIPT${NC}\n"
 			printf "# ${YELLOW}!!!WARNING WARNING WARNING!!!${NC}\n"
 
 			msg=$1
