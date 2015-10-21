@@ -3,25 +3,31 @@
 # git script to recursively initialize submodules.
 #------------------------------------------------------------------------------#
 
-# Echo warning that this script is an add-on
-cat << EOF
-#------------------------------------------------------------------------------#
-# Cinch-Utils Script
-#    git-supdate
-#
-# Intent:
-#    Initialize submodules for a project.  This script also moves
-#    each submodule to its master branch so that the submodule
-#    is not \"headless\".
-#
-# Operations:
-#    git submodule foreach --recursive \"
-#       git submodule init
-#       git submodule update
-#       git checkout master
-#    \"
-#------------------------------------------------------------------------------#
-EOF
+# source function definitions
+script_dir="$(dirname "$0")"
+. "${script_dir}/cinch-functions"
+
+# create description
+declare -a msg=(
+	""
+	" Cinch-Utils Script"
+	"    git-sinit"
+	""
+	" Intent:"
+	"    Initialize submodules for a project.  This script also moves"
+	"    each submodule to its master branch so that the submodule"
+	"    is not \"headless\"."
+	""
+	" Operations:"
+	"    git submodule foreach --recursive \""
+	"       git submodule init"
+	"       git submodule update"
+	"       git checkout master"
+	"    \""
+)
+
+# print warning banner with description
+print_banner $msg
 
 # This will make sure that all sub-modules are initialized
 git submodule foreach --recursive "

@@ -1,0 +1,42 @@
+#------------------------------------------------------------------------------#
+# Functions for cinch bash scripts
+#------------------------------------------------------------------------------#
+
+function print_banner() {
+	
+	: ${CINCH_SUPPRESS_SCRIPT_WARNINGS:=unset}
+
+  # only print if the terminal is interactive and the user has not
+  # suppressed warnings
+	if [ -t 1 ] && [ "${CINCH_SUPPRESS_SCRIPT_WARNINGS}" = "unset" ] ; then
+
+		# see if the terminal supports colors...
+		ncolors=$(tput colors)
+
+		if test -n "$ncolors" && test $ncolors -ge 8; then
+			RED='\033[1;31m'
+			YELLOW='\033[1;33m'
+      CYAN='\033[0;36m'
+			NC='\033[0m' # No Color
+
+			echo "#------------------------------------------------------------------------------#"
+			printf "# ${YELLOW}!!!WARNING WARNING WARNING!!!${NC}\n"
+			printf "# ${RED}THIS IS NOT A STANDARD GIT FEATURE!!!${NC}\n"
+			printf "# ${RED}CINCH-UTILS MUST BE INSTALLED TO"
+			printf " USE THIS SCRIPT!!!${NC}\n"
+			printf "# ${YELLOW}!!!WARNING WARNING WARNING!!!${NC}\n"
+
+			msg=$1
+			for i in "${msg[@]}"
+			do
+				printf "# ${CYAN}$i ${NC}\n"
+			done
+
+			echo "#------------------------------------------------------------------------------#"
+		fi
+	fi
+} # print_banner
+
+#------------------------------------------------------------------------------#
+# vim: syntax=sh tabstop=2 shiftwidth=2 expandtab :
+#------------------------------------------------------------------------------#

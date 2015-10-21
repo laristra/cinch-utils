@@ -3,34 +3,40 @@
 # git script to recursively update project to latest submodule heads.
 #------------------------------------------------------------------------------#
 
-# Echo warning that this script is an add-on
-cat << EOF
-#------------------------------------------------------------------------------#
-# Cinch-Utils Script
-#    git-supdate
-#
-# Intent:
-#    Synchronize remote changes to a git project that contains
-#    submodules.  This script also moves each submodule to its master
-#    branch so that the submodule is not \"headless\".
-#
-# Operations:
-#    git submodule foreach --recursive \"
-#       git checkout master
-#       git pull
-#    \"
-#
-#    git submodule foreach --recursive \"
-#       git add -u;
-#       git commit -m \"Updateing submodules\";
-#       git push
-#    \"
-#
-#    git add -u;
-#    git commit -m \"Updating submodules\";
-#    git push
-#------------------------------------------------------------------------------#
-EOF
+# source function definitions
+script_dir="$(dirname "$0")"
+. "${script_dir}/cinch-functions"
+
+# create description
+declare -a msg=(
+	""
+	" Cinch-Utils Script"
+	"    git-supdate"
+	""
+	" Intent:"
+	"    Synchronize remote changes to a git project that contains"
+	"    submodules.  This script also moves each submodule to its master"
+	"    branch so that the submodule is not \"headless\"."
+	""
+	" Operations:"
+	"    git submodule foreach --recursive \""
+	"       git checkout master"
+	"       git pull"
+	"    \""
+	""
+	"    git submodule foreach --recursive \""
+	"       git add -u;"
+	"       git commit -m \"Updateing submodules\";"
+	"       git push"
+	"    \""
+	""
+	"    git add -u;"
+	"    git commit -m \"Updating submodules\";"
+	"    git push"
+)
+
+# print warning banner with description
+print_banner $msg
 
 # This will make sure that all sub-modules have their latest changes
 git submodule foreach --recursive "

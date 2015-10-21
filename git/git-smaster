@@ -3,18 +3,28 @@
 # git script to recursively clone project.
 #------------------------------------------------------------------------------#
 
-# Echo warning that this script is an add-on
-echo "#------------------------------------------------------------------------------#"
-echo "# Cinch-Utils Script"
-echo "#    git-sclone"
-echo "#"
-echo "# Intent:"
-echo "#    Recursive clone of a git project that contains submodules."
-echo "#"
-echo "# Operations:"
-echo "#    git clone --recursive"
-echo "#------------------------------------------------------------------------------#"
-echo
+# source function definitions
+script_dir="$(dirname "$0")"
+. "${script_dir}/cinch-functions"
+
+# create description
+declare -a msg=(
+	""
+	" Cinch-Utils Script"
+	"    git-sclone"
+	""
+	" Intent:"
+	"    Recursive clone of a git project that contains submodules."
+	""
+	" Operations:"
+	"    git clone --recursive"
+	"    git submodule foreach --recursive \""
+	"    	  git checkout master"
+	"    \""
+)
+
+# print warning banner with description
+print_banner $msg
 
 # Clone the project
 git clone --recursive $1

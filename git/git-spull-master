@@ -3,23 +3,30 @@
 # git script to recursively pull latest submodule changes
 #------------------------------------------------------------------------------#
 
-# Echo warning that this script is an add-on
-echo "#------------------------------------------------------------------------------#"
-echo "# Cinch-Utils Script"
-echo "#    git-spull"
-echo "#"
-echo "# Intent:"
-echo "#    Pull remote changes to a git project that contains submodules."
-echo "#    This script also moves each submodule to its master branch"
-echo "#    so that the submodule is not \"headless\"."
-echo "#"
-echo "# Operations:"
-echo "#    git submodule foreach --recursive \""
-echo "#       git checkout master"
-echo "#       git pull"
-echo "#    \""
-echo "#------------------------------------------------------------------------------#"
-echo
+# source function definitions
+script_dir="$(dirname "$0")"
+. "${script_dir}/cinch-functions"
+
+# create description
+declare -a msg=(
+	""
+	" Cinch-Utils Script"
+	"    git-spull"
+	""
+	" Intent:"
+	"    Pull remote changes to a git project that contains submodules."
+	"    This script also moves each submodule to its master branch"
+	"    so that the submodule is not \"headless\"."
+	""
+	" Operations:"
+	"    git submodule foreach --recursive \""
+	"       git checkout master"
+	"       git pull"
+	"    \""
+)
+
+# print warning banner with description
+print_banner $msg
 
 # This will make sure that all sub-modules have their latest changes
 git submodule foreach --recursive "
