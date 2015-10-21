@@ -17,6 +17,7 @@ function print_banner() {
 			RED='\033[1;31m'
 			YELLOW='\033[1;33m'
       CYAN='\033[0;36m'
+      GREEN='\033[0;32m'
 			NC='\033[0m' # No Color
 
 			echo "#------------------------------------------------------------------------------#"
@@ -25,12 +26,17 @@ function print_banner() {
 			printf "# ${RED}IT IS PROVIDED BY THE CINCH-UTILS PROJECT${NC}\n"
 			printf "# ${RED}CINCH-UTILS MUST BE INSTALLED TO USE THIS SCRIPT${NC}\n"
 			printf "# ${YELLOW}!!!WARNING WARNING WARNING!!!${NC}\n"
-
 			msg=$1
 			for i in "${msg[@]}"
 			do
 				printf "# ${CYAN}$i ${NC}\n"
 			done
+
+      printf "#\n"
+			printf "# ${GREEN}Set CINCH_SUPPRESS_SCRIPT_WARNINGS${NC}"
+			printf " ${GREEN}to suppress this output, e.g.,${NC}\n"
+			printf "# ${GREEN}> export CINCH_SUPPRESS_SCRIPT_WARNINGS=1${NC} (bash)\n"
+			printf "# ${GREEN}> setenv CINCH_SUPPRESS_SCRIPT_WARNINGS 1${NC} (csh)\n"
 
 			echo "#------------------------------------------------------------------------------#"
 		fi
