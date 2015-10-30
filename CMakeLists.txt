@@ -79,6 +79,16 @@ install(FILES ${GIT_HELPERS} DESTINATION bin
         GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 #------------------------------------------------------------------------------#
+# Install cmake utilities
+#------------------------------------------------------------------------------#
+
+file(GLOB CMAKE_HELPERS ${CMAKE_SOURCE_DIR}/cmake/*)
+
+install(FILES ${CMAKE_HELPERS} DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+#------------------------------------------------------------------------------#
 # Formatting options for emacs and vim.
 # vim: set tabstop=4 shiftwidth=4 expandtab :
 #------------------------------------------------------------------------------#

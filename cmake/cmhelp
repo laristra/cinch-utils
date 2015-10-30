@@ -1,0 +1,84 @@
+#! /usr/bin/env bash
+#------------------------------------------------------------------------------#
+# Script to make CMake help easier to use.
+#------------------------------------------------------------------------------#
+
+nl=$'\n'
+RESTORE='\033[0m'
+RED='\033[00;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+cmdhdr=\
+"#--------------- Commands -----------------#"
+modhdr=\
+"#--------------- Modules ------------------#"
+prophdr=\
+"#--------------- Properties ---------------#"
+varhdr=\
+"#--------------- Variables ----------------#"
+plcyhdr=\
+"#--------------- Policies ----------------#"
+
+#------------------------------------------------------------------------------#
+# Substitutions
+#------------------------------------------------------------------------------#
+
+if [[ $1 = *CMAKE_CXX_* ]] ; then
+	arg=`echo $1 | sed 's,_CXX_,_<LANG>_,g'`
+elif [[ $1 = *CMAKE_C_* ]] ; then
+	arg=`echo $1 | sed 's,_C_,_<LANG>_,g'`
+elif [[ $1 = *CMAKE_Fortran_* ]] ; then
+	arg=`echo $1 | sed 's,_Fortran_,_<LANG>_,g'`
+else
+	arg=`echo $1`
+fi
+
+#------------------------------------------------------------------------------#
+# Grab full lists from cmake
+#------------------------------------------------------------------------------#
+
+commands=`cmake --help-command-list | tail -n +3`
+modules=`cmake --help-module-list | tail -n +3`
+properties=`cmake --help-property-list | tail -n +3`
+variables=`cmake --help-variable-list | tail -n +3`
+
+# this is pretty fragile: it depends on the header and footer staying
+# the same number of lines
+policies=`cmake --help-policies | tail -n +24 | head -n -64 | grep -E '^  CMP[0-9]+' | sed 's,^  ,,g'`
+
+if [ $# -eq 0 ] ; then
+
+	#---------------------------------------------------------------------------#
+	# With no arguements, just show everything that's available
+	#---------------------------------------------------------------------------#
+
+	echo -e "Usage: $0 <command|module|property|variable|policy>" \
+		"$nl$nl$CYAN$cmdhdr$RESTORE$nl""$commands" \
+		"$nl$nl$YELLOW$modhdr$RESTORE$nl""$modules" \
+		"$nl$nl$GREEN$prophdr$RESTORE$nl""$properties" \
+		"$nl$nl$PURPLE$varhdr$RESTORE$nl""$variables" \
+		"$nl$nl$RED$plcyhdr$RESTORE$nl""$policies" \
+		| less -irs
+
+else
+
+	#---------------------------------------------------------------------------#
+	# Do specific help
+	#---------------------------------------------------------------------------#
+
+	if [[ $commands == *$arg* ]] ; then
+		cmake --help-command $arg | less
+	elif [[ $modules == *$arg* ]] ; then
+		cmake --help-module $arg | less
+	elif [[ $properties == *$arg* ]] ; then
+		cmake --help-property $arg | less
+	elif [[ $variables == *$arg* ]] ; then
+		cmake --help-variable "$arg" | less
+	elif [[ $policies == *$arg* ]] ; then
+		cmake --help-policy "$arg" | less
+	fi
+
+fi
