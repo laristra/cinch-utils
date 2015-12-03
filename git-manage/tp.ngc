@@ -1,0 +1,7 @@
+[
+	{
+		"operation" : "mirror",
+		"src" : "git@gitlab.lanl.gov:csse/ThirdParty.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc/thirdparty-example.git"
+	}
+]
