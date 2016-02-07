@@ -22,9 +22,9 @@ Cinch-utils uses git submodules, so it must be checked out recursively:
 
     % git clone --recursive git@server:repo/cinch-utils.git
 
-If you are using the main bitbucket site, use this:
+If you are using the main github site, use this:
 
-    % git clone --recursive git@bitbucket.org:tuxfan/cinch-utils.git
+    % git clone --recursive git@github.com:losalamos/cinch-utils.git
 
 If you are using the gitlab mirror at LANL, use this:
 
