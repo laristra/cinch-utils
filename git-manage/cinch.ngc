@@ -1,17 +1,17 @@
 [
 	{
 		"operation" : "mirror",
-		"src" : "git@bitbucket.org:tuxfan/gtest.git",
-		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/gtest.git"
+		"src" : "git@github.com:google/googletest.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/google/googletest.git"
 	},
 	{
 		"operation" : "mirror",
-		"src" : "git@bitbucket.org:tuxfan/cinch.git",
+		"src" : "git@github.com:losalamos/cinch.git",
 		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch.git"
 	},
 	{
 		"operation" : "mirror",
-		"src" : "git@bitbucket.org:tuxfan/cinch-utils.git",
+		"src" : "git@github.com:losalamos/cinch-utils.git",
 		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/ngc-utils/cinch-utils.git"
 	}
 ]
