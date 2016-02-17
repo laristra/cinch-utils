@@ -55,7 +55,9 @@ if [ $# -eq 0 ] ; then
 	# With no arguements, just show everything that's available
 	#---------------------------------------------------------------------------#
 
-	echo -e "Usage: $0 <command|module|property|variable|policy>" \
+	cmd=$(basename $0)
+
+	echo -e "Usage: $cmd <command|module|property|variable|policy>" \
 		"$nl$nl$CYAN$cmdhdr$RESTORE$nl""$commands" \
 		"$nl$nl$YELLOW$modhdr$RESTORE$nl""$modules" \
 		"$nl$nl$GREEN$prophdr$RESTORE$nl""$properties" \
