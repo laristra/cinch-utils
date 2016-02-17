@@ -47,7 +47,7 @@ variables=`cmake --help-variable-list | tail -n +3`
 
 # this is pretty fragile: it depends on the header and footer staying
 # the same number of lines
-policies=`cmake --help-policies | tail -n +24 | head -n -64 | grep -E '^  CMP[0-9]+' | sed 's,^  ,,g'`
+policies=`cmake --help-policies | grep -E '^CMP[0-9]+'`
 
 if [ $# -eq 0 ] ; then
 
