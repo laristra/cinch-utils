@@ -25,7 +25,7 @@ declare -a msg=(
 	"    \""
 	""
    "    git submodule foreach --recursive '"
-   "       [ \"$name\" = \"gtest\" ] || \\"
+   "       [ \"\$name\" = \"gtest\" ] || \\"
    "          (git add -u && git commit -m \"Updating submodules\" && \\"
    "           git push) || \\"
    "          echo \"no changes\""
