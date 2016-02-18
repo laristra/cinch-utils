@@ -24,11 +24,12 @@ declare -a msg=(
 	"       git pull"
 	"    \""
 	""
-	"    git submodule foreach --recursive \""
-	"       git add -u;"
-	"       git commit -m \"Updateing submodules\";"
-	"       git push"
-	"    \""
+   "    git submodule foreach --recursive '"
+   "       [ \"$name\" = \"gtest\" ] || \\"
+   "          (git add -u && git commit -m \"Updating submodules\" && \\"
+   "           git push) || \\"
+   "          echo \"no changes\""
+   "    '"
 	""
 	"    git add -u;"
 	"    git commit -m \"Updating submodules\";"
@@ -45,11 +46,11 @@ git submodule foreach --recursive "
 ";
 
 # Commit changes to any nested submodules
-git submodule foreach --recursive "
-    git add -u;
-    git commit -m \"Updating submodules\";
-    git push
-";
+git submodule foreach --recursive '
+    [ "$name" = "gtest" ] || \
+	     (git add -u && git commit -m "Updating submodules" && git push) || \
+        echo "no changes"
+'
 
 # Update the top-level project
 git add -u;
