@@ -1,0 +1,12 @@
+[
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:flecsi/third-party.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/flecsi/third-party.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:flecsi/flecsi.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/flecsi/flecsi.git"
+	}
+]

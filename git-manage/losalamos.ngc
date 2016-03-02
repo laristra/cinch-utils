@@ -1,0 +1,27 @@
+[
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:google/googletest.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/google/googletest.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:losalamos/cinch.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/losalamos/cinch.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:losalamos/cinch-utils.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/losalamos/cinch-utils.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:losalamos/cinch-example.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/losalamos/cinch-example.git"
+	},
+	{
+		"operation" : "mirror",
+		"src" : "git@github.com:losalamos/cinch-nested-example.git",
+		"dest" : "ssh://git@xcp-stash.lanl.gov:7999/losalamos/cinch-nested-example.git"
+	}
+]
