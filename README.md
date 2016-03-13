@@ -1,7 +1,8 @@
 # Cinch-Utils Project
 
 The cinch-utils project provides a set of utilities that support library
-and application development using cinch.
+and application development using cinch.  The primary utility is the
+Cinch command-line interface, which is documented [here](ccli/README.md).
 
 # Requirements
 
@@ -10,7 +11,6 @@ and versions listed here:
 
 * CMake (Version 2.8)
 * Python (Version 2.7)
-	- sh module (Version 1.11)
 * Pandoc (Version 1.12)
 * TeX Live (No particular version)
 * Doxygen (Version 1.8)
