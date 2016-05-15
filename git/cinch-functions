@@ -2,6 +2,14 @@
 # Functions for cinch bash scripts
 #------------------------------------------------------------------------------#
 
+function cinch_branch() {
+  branch=`[ -f ../.cinchbranches ] &&
+    /usr/bin/cat ../.cinchbranches | grep $1 | cinch-strip-branch ||
+    echo "master"
+
+  return $branch
+}
+
 function print_banner() {
 	
 	: ${CINCH_SUPPRESS_SCRIPT_WARNINGS:=unset}

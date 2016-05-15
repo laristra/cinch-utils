@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+branch=`[ -f ../.cinchbranches ] && /usr/bin/cat ../.cinchbranches | grep $1 | \
+	cinch-strip-branch || echo "master"`
+echo $branch

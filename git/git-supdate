@@ -46,9 +46,7 @@ print_banner $msg
 
 # This will make sure that all sub-modules have their latest changes
 git submodule foreach --recursive '
-    branch=`[ -f ../.cinchbranches ] &&
-        /usr/bin/cat ../.cinchbranches | grep $name | cinch-strip-branch ||
-        echo "master"`
+    branch=`cinch-branch $name`
     git checkout $branch
     git pull
 ';
