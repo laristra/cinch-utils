@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+echo $(< /dev/stdin) | awk '{print $2}'

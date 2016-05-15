@@ -40,10 +40,10 @@ fi
 # Grab full lists from cmake
 #------------------------------------------------------------------------------#
 
-commands=`cmake --help-command-list | tail -n +3`
-modules=`cmake --help-module-list | tail -n +3`
-properties=`cmake --help-property-list | tail -n +3`
-variables=`cmake --help-variable-list | tail -n +3`
+commands=`cmake --help-command-list`
+modules=`cmake --help-module-list`
+properties=`cmake --help-property-list`
+variables=`cmake --help-variable-list`
 
 # this is pretty fragile: it depends on the header and footer staying
 # the same number of lines

@@ -9,46 +9,54 @@ script_dir="$(dirname "$0")"
 
 # create description
 declare -a msg=(
-	""
-	" Cinch-Utils Script"
-	"    git-supdate"
-	""
-	" Intent:"
-	"    Synchronize remote changes to a git project that contains"
-	"    submodules.  This script also moves each submodule to its master"
-	"    branch so that the submodule is not \"headless\"."
-	""
-	" Operations:"
-	"    git submodule foreach --recursive \""
-	"       git checkout master"
-	"       git pull"
-	"    \""
-	""
-   "    git submodule foreach --recursive '"
-   "       [ \"\$name\" = \"gtest\" ] || \\"
-   "          (git add -u && git commit -m \"Updating submodules\" && \\"
-   "           git push) || \\"
-   "          echo \"no changes\""
-   "    '"
-	""
-	"    git add -u;"
-	"    git commit -m \"Updating submodules\";"
-	"    git push"
+    ""
+    " Cinch-Utils Script"
+    "    git-supdate"
+    ""
+    " Intent:"
+    "    Synchronize remote changes to a git project that contains"
+    "    submodules.  This script moves each submodule to its named"
+    "    branch so that the submodule is not \"headless\".  The branch"
+    "    name is stored in the form \"submodule branch\" in"
+    "    .cinchbranches in the parent directory."
+    ""
+    " Operations:"
+    "    git submodule foreach --recursive \""
+    "       branch=\`[ -f ../.cinchbranches ] &&"
+    "           /usr/bin/cat ../.cinchbranch | grep \$name"
+    "           | cinch-strip-branch || echo \"master\"\`"
+    "       git checkout $branch"
+    "       git pull"
+    "    \""
+    ""
+    "    git submodule foreach --recursive '"
+    "       [ \"\$name\" = \"gtest\" ] || \\"
+    "          (git add -u && git commit -m \"Updating submodules\" && \\"
+    "           git push) || \\"
+    "          echo \"no changes\""
+    "    '"
+    ""
+    "    git add -u;"
+    "    git commit -m \"Updating submodules\";"
+    "    git push"
 )
 
 # print warning banner with description
 print_banner $msg
 
 # This will make sure that all sub-modules have their latest changes
-git submodule foreach --recursive "
-    git checkout master
+git submodule foreach --recursive '
+    branch=`[ -f ../.cinchbranches ] &&
+        /usr/bin/cat ../.cinchbranches | grep $name | cinch-strip-branch ||
+        echo "master"`
+    git checkout $branch
     git pull
-";
+';
 
 # Commit changes to any nested submodules
 git submodule foreach --recursive '
-    [ "$name" = "gtest" ] || \
-	     (git add -u && git commit -m "Updating submodules" && git push) || \
+    ([ "$name" = "gtest" ] || [ "$name" = "pfunit" ]) && \
+        (git add -u && git commit -m "Updating submodules" && git push) || \
         echo "no changes"
 '
 
@@ -56,3 +64,5 @@ git submodule foreach --recursive '
 git add -u;
 git commit -m "Updating submodules";
 git push
+
+# vim: set tabstop=4 shiftwidth=4 expandtab :
