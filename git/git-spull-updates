@@ -9,21 +9,21 @@ script_dir="$(dirname "$0")"
 
 # create description
 declare -a msg=(
-	""
-	" Cinch-Utils Script"
-	"    git-spull"
-	""
-	" Intent:"
-	"    Pull remote changes to a git project that contains submodules."
-	"    This script also moves each submodule to its master branch"
-	"    so that the submodule is not \"headless\"."
-	""
-	" Operations:"
-	"    git submodule foreach --recursive \""
-	"       branch=\`cinch-branch \$name\`"
-	"       git checkout master"
-	"       git pull"
-	"    \""
+    ""
+    " Cinch-Utils Script"
+    "    git-spull"
+    ""
+    " Intent:"
+    "    Pull remote changes to a git project that contains submodules."
+    "    This script also moves each submodule to its master branch"
+    "    so that the submodule is not \"headless\"."
+    ""
+    " Operations:"
+    "    git submodule foreach --recursive \""
+    "       branch=\`cinch-branch \$name\`"
+    "       git checkout master"
+    "       git pull"
+    "    \""
 )
 
 # print warning banner with description
@@ -37,3 +37,5 @@ git submodule foreach --recursive '
 ';
 
 git pull
+
+# vim: set tabstop=4 shiftwidth=4 expandtab :
