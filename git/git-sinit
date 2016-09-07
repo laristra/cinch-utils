@@ -37,4 +37,8 @@ git submodule foreach --recursive "
     git checkout $branch
 ";
 
+# Initialize and update top-level
+git submodule init
+git submodule update
+
 # vim: set tabstop=4 shiftwidth=4 expandtab :
