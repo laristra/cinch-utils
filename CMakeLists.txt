@@ -46,7 +46,8 @@ execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import distutils.sysconfig as c
 
 install(DIRECTORY ccli/ccli DESTINATION ${PYTHON_INSTDIR}
     FILES_MATCHING PATTERN "*.py")
-install(PROGRAMS ccli/bin/ccli DESTINATION bin)
+configure_file(${CMAKE_SOURCE_DIR}/ccli/bin/ccli.in ${CMAKE_BINARY_DIR}/ccli/bin/ccli @ONLY)
+install(PROGRAMS ${CMAKE_BINARY_DIR}/ccli/bin/ccli DESTINATION bin)
 install(PROGRAMS ccli/bin/ccli DESTINATION bin RENAME cinch-cli)
 
 #------------------------------------------------------------------------------#
