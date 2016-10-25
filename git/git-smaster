@@ -27,10 +27,16 @@ declare -a msg=(
 print_banner $msg
 
 # Clone the project
-git clone --recursive $1
+git clone --recursive $@
+
 
 # Parse off the name of the project
 project=`echo $1 | perl -ne 'm,([^/:]+)\.git$, && print "$1\n"'`
+
+# Check if the user has specified a project name
+if [[ -n "$2" ]] ; then
+    project=$2
+fi
 
 # Checkout master in each submodule.  The default behavior leaves
 # the submodules headless, which can be disturbing to the average user...

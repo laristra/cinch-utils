@@ -24,4 +24,4 @@ declare -a msg=(
 print_banner $msg
 
 # Clone the project
-git clone --recursive $1
+git clone --recursive $@
