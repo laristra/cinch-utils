@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+#------------------------------------------------------------------------------#
+# git script to recursively clone project.
+#------------------------------------------------------------------------------#
+
+# source function definitions
+script_dir="$(dirname "$0")"
+. "${script_dir}/cinch-functions"
+
+# create description
+declare -a msg=(
+	""
+	" Cinch-Utils Script"
+	"    git-remove"
+	""
+	" Intent:"
+	"    Remove a branch local and remotely."
+	""
+	" Operations:"
+	"    git push origin --delete arg"
+	"    git branch -d arg"
+)
+
+# print warning banner with description
+print_banner $msg
+
+# Clone the project
+git push origin --delete $1
+git branch -d $1
