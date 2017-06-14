@@ -15,29 +15,29 @@ cc_header_template = Template(
 #ifndef ${NAMESPACE_GUARD}${BASENAME}_h
 #define ${NAMESPACE_GUARD}${BASENAME}_h
 
-///
-/// \\file
-/// \date Initial file creation: ${DATE}
-///
+//----------------------------------------------------------------------------//
+//! @file
+//! @date Initial file creation: ${DATE}
+//----------------------------------------------------------------------------//
 
-${NAMESPACE_START}///
-/// \class ${CLASSNAME} ${FILENAME}
-/// \\brief ${CLASSNAME} provides...
-///
+${NAMESPACE_START}//----------------------------------------------------------------------------//
+//! FIXME: Description of class
+//----------------------------------------------------------------------------//
+
 ${TEMPLATE}class ${CLASSNAME}
 {
 public:
 
-${SPACES}/// Default constructor
+${SPACES}//! Default constructor
 ${SPACES}${CLASSNAME}() {}
 
-${SPACES}/// Copy constructor (disabled)
+${SPACES}//! Copy constructor (disabled)
 ${SPACES}${CLASSNAME}(const ${CLASSNAME} &) = delete;
 
-${SPACES}/// Assignment operator (disabled)
+${SPACES}//! Assignment operator (disabled)
 ${SPACES}${CLASSNAME} & operator = (const ${CLASSNAME} &) = delete;
 
-${SPACES}/// Destructor
+${SPACES}//! Destructor
 ${SPACES}${VIRTUAL}~${CLASSNAME}() {}
 
 ${PROTECTED}private:
