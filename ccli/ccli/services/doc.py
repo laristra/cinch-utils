@@ -45,7 +45,7 @@ class CINCHDoc(Service):
         self.parser.add_argument('-d', '--development', action="store_true",
             help='development output (inline metadata).')
 
-        self.parser.add_argument('directories',
+        self.parser.add_argument('directories', nargs='+',
             help='A colon-delimited list of directories to process.')
 
         # set the callback for this sub-command
@@ -119,16 +119,12 @@ class CINCHDoc(Service):
             for chapter in opts['sections']:
                 doc.add_chapter(chapter)
 
-        # Make a list of the directories
-        directories = args.directories.split(':')
-
-        for directory in directories:
+        # Recurse directories passed by user
+        for directory in args.directories:
 
             # Search sub-directories for documentation files
             walk_tree(directory, suffixes, documents,
                 opts['document'], args.verbose, args.development)
-            #walk_tree(args.directory, suffixes, documents,
-            #    opts['document'], args.verbose, args.development)
 
         # Remove the default chapter if sections were found
         # Because we add a 'header' chapter, there should be
