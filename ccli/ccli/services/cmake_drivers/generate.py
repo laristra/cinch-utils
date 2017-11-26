@@ -21,12 +21,31 @@ def recursive_glob(treeroot, pattern):
         if relpath.startswith('.'):
             relpath = ''
         results.extend(os.path.join(relpath, f) for f in goodfiles)
-    return results
+    return sorted(results)
 
 def generate(args):
 
     """
     """
+
+    if args.findsource:
+        cwd = os.getcwd()
+        src_glob = recursive_glob(cwd, '*.cc')
+        src_glob.extend(recursive_glob(cwd, '*.c'))
+        hdr_glob = recursive_glob(cwd, '*.h')
+
+        print "\nHeaders:\n"
+        for header in hdr_glob:
+            if "test" not in header:
+                print '  ' + header
+
+        print "\nSources:\n"
+        for source in src_glob:
+            if "test" not in source:
+                print '  ' + source
+
+        print '\n'
+        return
 
     # Setup output file name
     filename = 'CMakeLists.txt'

@@ -33,6 +33,9 @@ class CINCHCMake(Service):
             help='create a CMake template suitable for inclusion in ' +
                 'an application source directory.')
 
+        self.parser.add_argument('-fs', '--findsource', action="store_true",
+            help='list the sources in the current directory tree.')
+
         self.parser.add_argument('-ts', '--tabstop', action="store",
             default=2, help='set the default tabstop width ')
 
