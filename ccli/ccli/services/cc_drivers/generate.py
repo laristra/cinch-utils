@@ -125,7 +125,7 @@ def generate(args):
       else args.basename) + '.cc'
 
     namespace_start = "\nnamespace " + \
-      args.namespace.replace("::", " { namespace ") + \
+      args.namespace.replace("::", " {\nnamespace ") + \
       " {\n" if args.namespace != None else ''
 
     namespace_end = "\n} // namespace " + \

@@ -7,15 +7,7 @@ from string import Template
 
 cc_source_template = Template(
 """
-/*~-------------------------------------------------------------------------~~*
- * Copyright (c) 2014 Los Alamos National Security, LLC
- * All rights reserved.
- *~-------------------------------------------------------------------------~~*/
-
-//----------------------------------------------------------------------------//
-//! @file
-//! @date Initial file creation: ${DATE}
-//----------------------------------------------------------------------------//
+/*! @file */
 
 #include "${HEADER}"
 ${NAMESPACE_START}
@@ -29,10 +21,6 @@ ${TEMPLATE}void ${CLASSNAME}${TEMPLATE_TYPE}::method(argument_type & t)
 } // ${CLASSNAME}${TEMPLATE_TYPE}::method
 #endif
 ${NAMESPACE_END}
-/*~------------------------------------------------------------------------~--*
- * Formatting options for vim.
- * vim: set tabstop=${TABSTOP} shiftwidth=${TABSTOP} expandtab :
- *~------------------------------------------------------------------------~--*/
 """)
 
 #------------------------------------------------------------------------------#

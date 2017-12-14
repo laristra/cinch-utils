@@ -7,49 +7,47 @@ from string import Template
 
 cc_header_template = Template(
 """
-/*~--------------------------------------------------------------------------~*
- * Copyright (c) 2015 Los Alamos National Security, LLC
- * All rights reserved.
- *~--------------------------------------------------------------------------~*/
+#pragma once
 
-#ifndef ${NAMESPACE_GUARD}${BASENAME}_h
-#define ${NAMESPACE_GUARD}${BASENAME}_h
+/*! @file */
 
-//----------------------------------------------------------------------------//
-//! @file
-//! @date Initial file creation: ${DATE}
-//----------------------------------------------------------------------------//
-
-${NAMESPACE_START}//----------------------------------------------------------------------------//
-//! FIXME: Description of class
-//----------------------------------------------------------------------------//
+${NAMESPACE_START}/*!
+  \\todo Add Documentation!
+ */
 
 ${TEMPLATE}class ${CLASSNAME}
 {
 public:
 
-${SPACES}//! Default constructor
+${SPACES}/*!
+${SPACES}${SPACES}Default constructor
+${SPACES} */
+
 ${SPACES}${CLASSNAME}() {}
 
-${SPACES}//! Copy constructor (disabled)
+${SPACES}/*!
+${SPACES}${SPACES}Copy constructor (disabled)
+${SPACES} */
+
 ${SPACES}${CLASSNAME}(const ${CLASSNAME} &) = delete;
 
-${SPACES}//! Assignment operator (disabled)
+${SPACES}/*!
+${SPACES}${SPACES}Assignment operator (disabled)
+${SPACES} */
+
 ${SPACES}${CLASSNAME} & operator = (const ${CLASSNAME} &) = delete;
 
-${SPACES}//! Destructor
+${SPACES}/*!
+${SPACES}${SPACES}Destructor
+${SPACES} */
+
 ${SPACES}${VIRTUAL}~${CLASSNAME}() {}
 
 ${PROTECTED}private:
 
 }; // class ${CLASSNAME}
 
-${NAMESPACE_END}#endif // ${NAMESPACE_GUARD}${BASENAME}_h
-
-/*~-------------------------------------------------------------------------~-*
- * Formatting options for vim.
- * vim: set tabstop=${TABSTOP} shiftwidth=${TABSTOP} expandtab :
- *~-------------------------------------------------------------------------~-*/
+${NAMESPACE_END}
 """)
 
 #------------------------------------------------------------------------------#
