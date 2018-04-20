@@ -44,9 +44,9 @@ def create_project(args):
     os.mkdir("doc")
     os.mkdir("doc/doxygen")
     os.mkdir("doc/doxygen/images")
-    os.mkdir("src")
-    os.mkdir("src/example")
-    os.mkdir("src/example/test")
+    os.mkdir(args.name)
+    os.mkdir(args.name + "/example")
+    os.mkdir(args.name + "/example/test")
 
     #--------------------------------------------------------------------------#
     # Copy configuration files into tree.
@@ -55,7 +55,6 @@ def create_project(args):
     print "Copying configuration files..."
 
     shutil.copyfile("cinch/bootstrap/top-level.txt", "CMakeLists.txt")
-    shutil.copyfile("cinch/bootstrap/src-level.txt", "src/CMakeLists.txt")
     shutil.copyfile("cinch/doxygen/doxygen.conf.in", "doc/doxygen.conf.in")
 
     #--------------------------------------------------------------------------#
@@ -70,13 +69,6 @@ def create_project(args):
     )
     fd = open("config/project.cmake", 'w')
     fd.write(config_project[1:-1])
-    fd.close()
-
-    config_packages = cinch_config_packages.safe_substitute(
-        TABSTOP=args.tabstop
-    )
-    fd = open("config/packages.cmake", 'w')
-    fd.write(config_packages[1:-1])
     fd.close()
 
     config_documentation = cinch_config_documentation.safe_substitute(
@@ -102,7 +94,7 @@ def create_project(args):
     example_cmake = cinch_example_cmake.safe_substitute(
         TABSTOP=args.tabstop
     )
-    fd = open("src/example/CMakeLists.txt", 'w')
+    fd = open(args.name + "/example/CMakeLists.txt", 'w')
     fd.write(example_cmake[1:-1])
     fd.close()
 
@@ -111,30 +103,33 @@ def create_project(args):
         DATE=date,
         TABSTOP=args.tabstop
     )
-    fd = open("src/example/utils.h", 'w')
+    fd = open(args.name + "/example/utils.h", 'w')
     fd.write(example_header[1:-1])
     fd.close()
 
     example_source = cinch_example_source.safe_substitute(
+        PROJECT=args.name,
         AUTHOR=author,
         DATE=date,
         TABSTOP=args.tabstop
     )
-    fd = open("src/example/utils.cc", 'w')
+    fd = open(args.name + "/example/utils.cc", 'w')
     fd.write(example_source[1:-1])
     fd.close()
 
     example_unit = cinch_example_unit.safe_substitute(
+        PROJECT=args.name,
         TABSTOP=args.tabstop
     )
-    fd = open("src/example/test/unit.cc", 'w')
+    fd = open(args.name + "/example/test/unit.cc", 'w')
     fd.write(example_unit[1:-1])
     fd.close()
 
     example_md = cinch_example_md.safe_substitute(
+        PROJECT=args.name,
         TABSTOP=args.tabstop
     )
-    fd = open("src/example/utils.md", 'w')
+    fd = open(args.name + "/example/utils.md", 'w')
     fd.write(example_md[1:-1])
     fd.close()
 
@@ -152,6 +147,7 @@ def create_project(args):
     fd.close()
 
     app_source = cinch_app_source.safe_substitute(
+        PROJECT=args.name,
         AUTHOR=author,
         DATE=date,
         TABSTOP=args.tabstop

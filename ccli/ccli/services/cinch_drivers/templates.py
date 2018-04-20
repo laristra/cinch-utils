@@ -15,6 +15,26 @@ cinch_config_project = Template(
 project(${PROJECT})
 
 #------------------------------------------------------------------------------#
+# Check for C++14 compiler.
+#------------------------------------------------------------------------------#
+
+include(cxx14)
+
+check_for_cxx14_compiler(CXX11_COMPILER)
+
+if(CXX11_COMPILER)
+	enable_cxx14()
+else()
+	message(FATAL_ERROR "C++14 compatible compiler not found")
+endif()
+
+#------------------------------------------------------------------------------#
+# Load cinch extras
+#------------------------------------------------------------------------------#
+
+cinch_load_extras()
+
+#------------------------------------------------------------------------------#
 # Set application directory
 #------------------------------------------------------------------------------#
 
@@ -24,40 +44,13 @@ cinch_add_application_directory(app)
 # Add library targets
 #------------------------------------------------------------------------------#
 
-cinch_add_library_target(example src)
+cinch_add_library_target(example ${PROJECT})
 
 #------------------------------------------------------------------------------#
 # Set header suffix regular expression
 #------------------------------------------------------------------------------#
 
 set(CINCH_HEADER_SUFFIXES "\\\\.h")
-
-#----------------------------------------------------------------------------~-#
-# Formatting options for vim.
-# vim: set tabstop=${TABSTOP} shiftwidth=${TABSTOP} expandtab :
-#----------------------------------------------------------------------------~-#
-""")
-
-cinch_config_packages = Template(
-"""
-#~----------------------------------------------------------------------------~#
-# Copyright (c) 2014 Los Alamos National Security, LLC
-# All rights reserved.
-#~----------------------------------------------------------------------------~#
-
-#------------------------------------------------------------------------------#
-# Check for C++11 compiler.
-#------------------------------------------------------------------------------#
-
-include(cxx11)
-
-check_for_cxx11_compiler(CXX11_COMPILER)
-
-if(CXX11_COMPILER)
-	enable_cxx11()
-else()
-	message(FATAL_ERROR "C++11 compatible compiler not found")
-endif()
 
 #----------------------------------------------------------------------------~-#
 # Formatting options for vim.
@@ -183,7 +176,7 @@ cinch_example_source = Template(
 
 #include <iostream>
 
-#include "utils.h"
+#include <${PROJECT}/example/utils.h>
 
 namespace example {
 
@@ -208,7 +201,7 @@ cinch_example_unit = Template(
 
 #include <cinchtest.h>
 
-#include "example/example/utils.h"
+#include <${PROJECT}/example/utils.h>
 
 TEST(unit, testname) {
 
@@ -298,7 +291,7 @@ cinch_app_source = Template(
 /// \date Initial file creation: ${DATE}
 ///
 
-#include "example/example/utils.h"
+#include <${PROJECT}/example/utils.h>
 
 int main(int argc, char ** argv) {
   example::myfunc();
