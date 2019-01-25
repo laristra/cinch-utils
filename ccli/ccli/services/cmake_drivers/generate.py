@@ -36,12 +36,16 @@ def generate(args):
 
         print "\nHeaders:\n"
         for header in hdr_glob:
-            if "test" not in header:
+            if "ftest" in header:
+                print '  ' + header
+            elif "test" not in header:
                 print '  ' + header
 
         print "\nSources:\n"
         for source in src_glob:
-            if "test" not in source:
+            if "ftest" in header:
+                print '  ' + source
+            elif "test" not in source:
                 print '  ' + source
 
         print '\n'
